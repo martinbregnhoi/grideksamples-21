@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bistro Babushka</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+
+            display: inline-block;
+            font-size: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "sans-serif";
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        header {
+            background-color: darkorange;
+        }
+
+        main,
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        button {
+            font-size: 1rem;
+            padding: 5px;
+            margin: 5px;
+            display: block;
+        }
+
+        footer {
+            background: #666;
+            color: #ddd;
+        }
+
+        footer section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 10px;
+        }
+
+        #ret-oversigt {
+
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 20px;
+            
+
+        }
+
+        #ret-oversigt h1 {
+            grid-column: 1/4;
+        }
+
+        .overskrifter {
+            border-bottom: 2px solid #000;
+            margin: 10px 0;
+        }
+
+        #ret-oversigt article {
+            cursor: pointer;
+            border: 1px solid darkorange;
+        }
+
+        article h2,
+        article p {
+            padding: 10px;
+        }
+        
+        #indhold{
+            display: grid;
+        }
+        #indhold h4, #indhold figure{
+            grid-area:1/1;
+        }
+        #indhold h4{
+            z-index: 100;
+            color: #000;
+            place-self: center;
+            font-size: 30px;
+            margin: 0 10px;
+            padding:10px;         
+            background: rgba(255,255,255,.7)
+        }
+        #indhold figure{
+            display:grid;
+        }
+        #indhold figure img, #indhold figure figcaption{
+            grid-area:1/1;
+        }
+        #indhold figure figcaption{
+            align-self:end;
+            color:#fff;
+            padding: 5px;
+            text-shadow: 3px 3px 3px #000;
+        }
+        @media screen and (min-width:600px){
+         
+            #indhold h4{
+                  margin: 0 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="imgs/red_star.svg" alt="">
+    </header>
+    <nav></nav>
+    <main>
+        
+        <section id="indhold"></section>
+        <h1 id="overskrift">Retter</h1>
+        <section id="ret-oversigt"></section>
+    </main>
+    <template>
+        <article>
+            <h2></h2>
+            <img src="" alt="">
+            <p class="tekst"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+    <footer>
+        <section>
+            <address>Addresse: <br>Grønnegade 97<br>1234 København K </address>
+            <aside>Åbningstider: <br> Mandag – fredag 10:30 – 22:00<br>Lørdag 12:00 – 23:00</aside>
+        </section>
+    </footer>
+    <script>
+        let retter = [];
+        let content;
+        const liste = document.querySelector("#ret-oversigt");
+        const skabelon = document.querySelector("template");
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            getJson();
+        }
+
+        async function getJson() {
+            const url = "http://mabe-kea.dk/migration/wordpress/wp-json/wp/v2/retter?per_page=100";
+            let response = await fetch(url);
+            retter = await response.json();
+            visRetter();
+            
+             const pageurl = "http://mabe-kea.dk/migration/wordpress/wp-json/wp/v2/pages/5";
+        
+            let response2 = await fetch(pageurl);
+    
+            content = await response2.json();
+            //console.log({content})
+
+         visTop();
+
+        }
+
+        function visRetter() {
+            console.log(retter);
+            retter.forEach(ret => {
+                const klon = skabelon.cloneNode(true).content;
+                klon.querySelector("h2").textContent = ret.titel;
+                klon.querySelector("img").src = ret.billede.guid;
+                klon.querySelector(".pris").innerHTML = ret.pris + " kr";
+                klon.querySelector(".tekst").innerHTML = ret.lang_beskrivelse;
+                klon.querySelector("article").addEventListener("click", () => {
+                    location.href = `singleViewT9.html?id=${ret.id}`;
+                })
+                liste.appendChild(klon);
+            })
+        }
+        
+         function visTop() {
+            //console.log(topcontent);
+            document.querySelector("#indhold").innerHTML = content.content.rendered;
+        }
+    </script>
+
+</body></html>

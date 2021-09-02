@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <style>
+        main{
+            max-width:1000px;
+            margin: 0 auto;
+            background: #ca1;
+            display:grid;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
+            grid-auto-flow: dense;
+            padding:10px
+        }
+        
+        div{
+            background: #666;
+        }
+        
+    
+        div:first-child, div:last-child{
+            background:#fff;
+        }
+        
+        @media screen and (min-width:600px){ 
+            
+            main{
+             grid-template-columns: repeat(4,1fr);   
+            }
+            
+            div:nth-child(4n+2){
+            grid-column: span 3;
+        }
+        div:nth-child(4n+3){
+            grid-column: span 3;
+        }
+       }  
+    </style>
+    
+    
+</head>
+<body>
+    <main>
+        <div>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor asperiores eius, quisquam consectetur nostrum corporis dignissimos voluptatibus provident repellat dicta assumenda qui voluptates enim sint aspernatur soluta, architecto incidunt magni?</div>
+        <div>2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae sed sunt sit, illo voluptatibus. Ab itaque autem esse, voluptas, perspiciatis deserunt minus adipisci cupiditate dolorem illum. Quod placeat, dolores est!</div>
+        <div>3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae eum sapiente id quos deleniti dicta repudiandae placeat soluta aliquam facere rem, illum vitae, molestias earum optio culpa, doloremque cumque dolor.</div>
+        <div>4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero qui ut cum! Fugiat dolor pariatur deleniti, dolores delectus inventore ex hic, ullam, facere velit unde porro sequi laudantium. Beatae, aut.</div>
+        <div>5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis adipisci velit alias veniam autem enim nam placeat, aperiam ea molestias molestiae aliquam exercitationem facilis cupiditate rerum laborum doloremque est tempora.</div>
+        <div>6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus blanditiis velit ab fugiat iste rerum, incidunt tempora, quam delectus, veniam accusantium, eos aliquam! Quis molestiae, aliquam commodi labore eligendi saepe?</div>
+        <div>7 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia accusamus earum voluptate libero incidunt tempora voluptatibus. Quidem eos voluptate suscipit possimus tempore ipsum porro nam illo dolores! Dolorem iste, facere.</div>
+        <div>8 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore eveniet explicabo quasi dolore quo, id, impedit eius sint nam voluptate eos! Mollitia alias consectetur sed vel vero aliquam provident eligendi.</div>
+        <div>9 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, adipisci, ipsum. Labore obcaecati dolorem, doloremque nostrum accusantium quibusdam, quod, laboriosam enim dolorum perspiciatis perferendis nihil velit hic magni cum iure?</div>
+        <div>10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi libero voluptas consequatur nobis modi, ratione in magni porro, quia eum doloremque vitae illo voluptatibus placeat repudiandae ad. Vitae, blanditiis, voluptatem.</div>
+        <div>11 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima sequi, eum, voluptates officia velit fugiat minus possimus libero officiis culpa quo assumenda molestias quos animi aut maxime eius est doloremque.</div>
+        <div>12 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit accusamus quisquam facilis iusto adipisci maxime. Molestias, maiores placeat, eaque, ea magnam error, perspiciatis a odio aliquam maxime deleniti excepturi itaque!</div>
+    </main>
+</body>
+</html>
